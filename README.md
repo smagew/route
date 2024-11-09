@@ -3,7 +3,7 @@
 [![Author](https://img.shields.io/badge/author-@philipobenito-blue.svg?style=flat-square)](https://twitter.com/philipobenito)
 [![Latest Version](https://img.shields.io/github/release/thephpleague/route.svg?style=flat-square)](https://github.com/thephpleague/route/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Tests](https://github.com/thephpleague/route/actions/workflows/test.yml/badge.svg)](https://github.com/thephpleague/route/actions/workflows/test.yml)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/thephpleague/route/test.yml?style=flat-square)](https://github.com/thephpleague/route/actions/workflows/test.yml)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/thephpleague/route.svg?style=flat-square)](https://scrutinizer-ci.com/g/thephpleague/route/code-structure)
 [![Quality Score](https://img.shields.io/scrutinizer/g/thephpleague/route.svg?style=flat-square)](https://scrutinizer-ci.com/g/thephpleague/route)
 [![Total Downloads](https://img.shields.io/packagist/dt/league/route.svg?style=flat-square)](https://packagist.org/packages/league/route)
