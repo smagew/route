@@ -12,7 +12,7 @@ class Exception extends \Exception implements HttpExceptionInterface
     public function __construct(
         protected int $status,
         protected $message = '',
-        \Exception $previous = null,
+        ?\Exception $previous = null,
         protected array $headers = [],
         int $code = 0
     ) {
