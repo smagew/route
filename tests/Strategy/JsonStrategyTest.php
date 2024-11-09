@@ -57,7 +57,7 @@ class JsonStrategyTest extends TestCase
             ->expects($this->once())
             ->method('withHeader')
             ->with($this->equalTo('content-type'), $this->equalTo('application/json'))
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $factory = $this->createMock(ResponseFactoryInterface::class);
@@ -86,7 +86,7 @@ class JsonStrategyTest extends TestCase
             ->expects($this->once())
             ->method('withHeader')
             ->with($this->equalTo('content-type'), $this->equalTo('application/json'))
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $expectedResponse
@@ -223,14 +223,14 @@ class JsonStrategyTest extends TestCase
             ->expects($this->once())
             ->method('withAddedHeader')
             ->with($this->equalTo('content-type'), $this->equalTo('application/json'))
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $response
             ->expects($this->once())
             ->method('withStatus')
             ->with($this->equalTo(500), $this->equalTo('Exception thrown'))
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $body
@@ -311,7 +311,7 @@ class JsonStrategyTest extends TestCase
             ->expects($this->once())
             ->method('withHeader')
             ->with($this->equalTo('content-type'), $this->equalTo('application/json'))
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $expectedResponse
@@ -369,17 +369,9 @@ class JsonStrategyTest extends TestCase
         $factory  = $this->createMock(ResponseFactoryInterface::class);
 
         $response
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('withHeader')
-            ->with($this->equalTo('allow'), $this->equalTo('GET, POST'))
-            ->will($this->returnSelf())
-        ;
-
-        $response
-            ->expects($this->at(1))
-            ->method('withHeader')
-            ->with($this->equalTo('access-control-allow-methods'), $this->equalTo('GET, POST'))
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $factory

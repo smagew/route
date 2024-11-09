@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace League\Route;
 
 use League\Route\Middleware\{MiddlewareAwareInterface, MiddlewareAwareTrait};
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use League\Route\Strategy\{StrategyAwareInterface, StrategyAwareTrait, StrategyInterface};
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
@@ -21,35 +23,15 @@ class Route implements
     use RouteConditionHandlerTrait;
     use StrategyAwareTrait;
 
-    /**
-     * @var callable|string
-     */
     protected $handler;
 
-    /**
-     * @var RouteGroup
-     */
-    protected $group;
-
-    /**
-     * @var string
-     */
-    protected $method;
-
-    /**
-     * @var string
-     */
-    protected $path;
-
-    /**
-     * @var array
-     */
-    protected $vars = [];
-
-    public function __construct(string $method, string $path, $handler)
-    {
-        $this->method  = $method;
-        $this->path    = $path;
+    public function __construct(
+        protected array|string $method,
+        protected string $path,
+        callable|string $handler,
+        protected ?RouteGroup $group = null,
+        protected array $vars = []
+    ) {
         $this->handler = $handler;
     }
 
@@ -57,7 +39,7 @@ class Route implements
     {
         $callable = $this->handler;
 
-        if (is_string($callable) && strpos($callable, '::') !== false) {
+        if (is_string($callable) && str_contains($callable, '::')) {
             $callable = explode('::', $callable);
         }
 
@@ -80,7 +62,7 @@ class Route implements
         return $callable;
     }
 
-    public function getMethod(): string
+    public function getMethod(): array|string
     {
         return $this->method;
     }
@@ -122,8 +104,8 @@ class Route implements
     public function setParentGroup(RouteGroup $group): self
     {
         $this->group = $group;
-        $prefix      = $this->group->getPrefix();
-        $path        = $this->getPath();
+        $prefix = $this->group->getPrefix();
+        $path = $this->getPath();
 
         if (strcmp($prefix, substr($path, 0, strlen($prefix))) !== 0) {
             $path = $prefix . $path;
@@ -139,7 +121,11 @@ class Route implements
         return $this;
     }
 
-    protected function resolve(string $class, ?ContainerInterface $container = null)
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    protected function resolve(string $class, ?ContainerInterface $container = null): mixed
     {
         if ($container instanceof ContainerInterface && $container->has($class)) {
             return $container->get($class);

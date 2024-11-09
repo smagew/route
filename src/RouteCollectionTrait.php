@@ -4,42 +4,44 @@ declare(strict_types=1);
 
 namespace League\Route;
 
+use League\Route\Http\Request;
+
 trait RouteCollectionTrait
 {
-    abstract public function map(string $method, string $path, $handler): Route;
+    abstract public function map(string|array $method, string $path, string|callable $handler): Route;
 
-    public function delete(string $path, $handler): Route
+    public function delete(string $path, string|callable $handler): Route
     {
-        return $this->map('DELETE', $path, $handler);
+        return $this->map(Request::METHOD_DELETE, $path, $handler);
     }
 
-    public function get(string $path, $handler): Route
+    public function get(string $path, string|callable $handler): Route
     {
-        return $this->map('GET', $path, $handler);
+        return $this->map(Request::METHOD_GET, $path, $handler);
     }
 
-    public function head(string $path, $handler): Route
+    public function head(string $path, string|callable $handler): Route
     {
-        return $this->map('HEAD', $path, $handler);
+        return $this->map(Request::METHOD_HEAD, $path, $handler);
     }
 
-    public function options(string $path, $handler): Route
+    public function options(string $path, string|callable $handler): Route
     {
-        return $this->map('OPTIONS', $path, $handler);
+        return $this->map(Request::METHOD_OPTIONS, $path, $handler);
     }
 
-    public function patch(string $path, $handler): Route
+    public function patch(string $path, string|callable $handler): Route
     {
-        return $this->map('PATCH', $path, $handler);
+        return $this->map(Request::METHOD_PATCH, $path, $handler);
     }
 
-    public function post(string $path, $handler): Route
+    public function post(string $path, string|callable $handler): Route
     {
-        return $this->map('POST', $path, $handler);
+        return $this->map(Request::METHOD_POST, $path, $handler);
     }
 
-    public function put(string $path, $handler): Route
+    public function put(string $path, string|callable $handler): Route
     {
-        return $this->map('PUT', $path, $handler);
+        return $this->map(Request::METHOD_PUT, $path, $handler);
     }
 }

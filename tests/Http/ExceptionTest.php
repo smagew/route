@@ -34,7 +34,7 @@ class ExceptionTest extends TestCase
 
         $response
             ->method('withAddedHeader')
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $response
@@ -47,7 +47,7 @@ class ExceptionTest extends TestCase
             ->expects($this->once())
             ->method('withStatus')
             ->with($e->getStatusCode(), $e->getMessage())
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $response = $e->buildJsonResponse($response);

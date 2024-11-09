@@ -81,13 +81,6 @@ class RouteTest extends TestCase
         $this->assertEquals('action', $newCallable[1]);
     }
 
-    public function testRouteThrowsExceptionWhenSettingAndResolvingNonCallable(): void
-    {
-        $this->expectException(RuntimeException::class);
-        $route = new Route('GET', '/', new \stdClass());
-        $route->getCallable();
-    }
-
     public function testRouteCanSetAndGetAllProperties(): void
     {
         $route = new Route('GET', '/something', static function () {

@@ -13,30 +13,24 @@ class DecoratorTest extends TestCase
     {
         $decorator = new Decorator\DefaultHeaderDecorator([
             'content-type' => 'application/json',
-            'custom-key'   => 'custom value',
+            'custom-key' => 'custom value',
         ]);
 
         $response = $this->createMock(ResponseInterface::class);
 
         $response
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('hasHeader')
-            ->with($this->equalTo('content-type'))
-            ->willReturn(false)
-        ;
-
-        $response
-            ->expects($this->at(2))
-            ->method('hasHeader')
-            ->with($this->equalTo('custom-key'))
-            ->willReturn(true)
+            ->willReturnCallback(function (string $header) {
+                return $header !== 'content-type';
+            })
         ;
 
         $response
             ->expects($this->once())
             ->method('withAddedHeader')
             ->with($this->equalTo('content-type'), $this->equalTo('application/json'))
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $decorator($response);

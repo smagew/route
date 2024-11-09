@@ -67,7 +67,7 @@ class RouterTest extends TestCase
     {
         $router = new class () extends Router
         {
-            public $patternMatchers = [];
+            public array $patternMatchers = [];
         };
 
         $router->addPatternMatcher('mockMatcher', '[a-zA-Z]');

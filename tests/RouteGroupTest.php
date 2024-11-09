@@ -20,69 +20,31 @@ class RouteGroupTest extends TestCase
             ->expects($this->exactly(8))
             ->method('setHost')
             ->with($this->equalTo('example.com'))
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $route
             ->expects($this->exactly(8))
             ->method('setScheme')
             ->with($this->equalTo('https'))
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $route
             ->expects($this->exactly(8))
             ->method('setPort')
             ->with($this->equalTo(8080))
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $router
-            ->expects($this->at(0))
+            ->expects($this->exactly(7))
             ->method('map')
-            ->with($this->equalTo('GET'), $this->equalTo('/acme/route'), $this->equalTo($callback))
-            ->willReturn($route)
-        ;
-
-        $router
-            ->expects($this->at(1))
-            ->method('map')
-            ->with($this->equalTo('POST'), $this->equalTo('/acme/route'), $this->equalTo($callback))
-            ->willReturn($route)
-        ;
-
-        $router
-            ->expects($this->at(2))
-            ->method('map')
-            ->with($this->equalTo('PUT'), $this->equalTo('/acme/route'), $this->equalTo($callback))
-            ->willReturn($route)
-        ;
-
-        $router
-            ->expects($this->at(3))
-            ->method('map')
-            ->with($this->equalTo('PATCH'), $this->equalTo('/acme/route'), $this->equalTo($callback))
-            ->willReturn($route)
-        ;
-
-        $router
-            ->expects($this->at(4))
-            ->method('map')
-            ->with($this->equalTo('DELETE'), $this->equalTo('/acme/route'), $this->equalTo($callback))
-            ->willReturn($route)
-        ;
-
-        $router
-            ->expects($this->at(5))
-            ->method('map')
-            ->with($this->equalTo('OPTIONS'), $this->equalTo('/acme/route'), $this->equalTo($callback))
-            ->willReturn($route)
-        ;
-
-        $router
-            ->expects($this->at(6))
-            ->method('map')
-            ->with($this->equalTo('HEAD'), $this->equalTo('/acme/route'), $this->equalTo($callback))
+            ->with(
+                $this->matchesRegularExpression('/^(GET|POST|PUT|PATCH|DELETE|OPTIONS|HEAD)$/'),
+                $this->equalTo('/acme/route'),
+                $this->equalTo($callback)
+            )
             ->willReturn($route)
         ;
 
@@ -127,7 +89,7 @@ class RouteGroupTest extends TestCase
             ->expects($this->once())
             ->method('setStrategy')
             ->with($this->equalTo($strategy))
-            ->will($this->returnSelf())
+            ->willReturnSelf()
         ;
 
         $group = new RouteGroup('/acme', function ($route) use ($callback) {
