@@ -264,6 +264,44 @@ $router = new League\Route\Router;
 $router->map('GET', '/', 'Acme\controller');
 ~~~
 
+### PSR-15 Middleware
+~~~php
+<?php declare(strict_types=1);
+
+namespace Acme;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+class SomeController implements \Psr\Http\Server\RequestHandlerInterface
+{
+    /**
+     * Controller.
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function handle(ServerRequestInterface $request): ResponseInterface
+    {
+        // ...
+    }
+}
+~~~
+
+~~~php
+<?php declare(strict_types=1);
+
+$router = new League\Route\Router;
+
+$router->map('GET', '/', new Acme\SomeController);
+
+// or you can use lazy loading and the container will resolve the controller,
+// any resolved controller that implements RequestHandlerInterface will be treated as a PSR-15 middleware
+// and the handle method will be invoked
+$router->map('GET', '/', Acme\SomeController::class);
+~~~
+
 ## Dependency Injection
 
 Where Route is instantiating the objects for your defined controller, a dependency injection container can be used to resolve those objects. Read more on dependency injection [here](/5.x/dependency-injection/).

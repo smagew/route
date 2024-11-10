@@ -9,9 +9,9 @@ sections:
 ---
 ## Introduction
 
-Every defined route requires a `callable` to invoke when dispatched, something that could be described as a controller in MVC. By default, Route only imposes that the callable is defined with a specific signature, it is given a request object as the first argument, an associative array of wildcard route arguments as the second argument, and expects a response object to be returned. Read more about this in [HTTP](/4.x/http).
+Every defined route requires a `callable` to invoke when dispatched, something that could be described as a controller in MVC. By default, Route only imposes that the callable is defined with a specific signature, it is given a request object as the first argument, an associative array of wildcard route arguments as the second argument, and expects a response object to be returned. Read more about this in [HTTP](/5.x/http).
 
-This behaviour can be changed by creating/using a different strategy, read more about strategies [here](/4.x/strategies).
+This behaviour can be changed by creating/using a different strategy, read more about strategies [here](/5.x/strategies).
 
 ## Defining Controllers
 
@@ -264,6 +264,44 @@ $router = new League\Route\Router;
 $router->map('GET', '/', 'Acme\controller');
 ~~~
 
+### PSR-15 Middleware
+~~~php
+<?php declare(strict_types=1);
+
+namespace Acme;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+class SomeController implements \Psr\Http\Server\RequestHandlerInterface
+{
+    /**
+     * Controller.
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     *
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function handle(ServerRequestInterface $request): ResponseInterface
+    {
+        // ...
+    }
+}
+~~~
+
+~~~php
+<?php declare(strict_types=1);
+
+$router = new League\Route\Router;
+
+$router->map('GET', '/', new Acme\SomeController);
+
+// or you can use lazy loading and the container will resolve the controller,
+// any resolved controller that implements RequestHandlerInterface will be treated as a PSR-15 middleware
+// and the handle method will be invoked
+$router->map('GET', '/', Acme\SomeController::class);
+~~~
+
 ## Dependency Injection
 
-Where Route is instantiating the objects for your defined controller, a dependency injection container can be used to resolve those objects. Read more on dependency injection [here](/4.x/dependency-injection/).
+Where Route is instantiating the objects for your defined controller, a dependency injection container can be used to resolve those objects. Read more on dependency injection [here](/5.x/dependency-injection/).

@@ -2,7 +2,7 @@
   version: unstable
   name: League\Route (dev-5.x)
   type: Unstable
-  requires: PHP >= 7.2.0
+  requires: PHP >= 8.1.0
   release: None
   support: Own Risk
   url: /unstable/
@@ -17,12 +17,30 @@
     Cached Router (BETA): '/unstable/cached-router/'
     Dependency Injection: '/unstable/dependency-injection/'
 -
-  default: true
+    default: true
+    version: 6.x
+    name: League\Route 6.x
+    type: Current
+    requires: PHP >= 8.1.0
+    release: 6.0.0 - 2024-11
+    support: Ongoing
+    url: /6.x/
+    menu:
+        Getting Started: '/6.x/'
+        Basic Usage: '/6.x/usage/'
+        HTTP: '/6.x/http/'
+        Routes: '/6.x/routes/'
+        Controllers: '/6.x/controllers/'
+        Strategies: '/6.x/strategies/'
+        Middleware: '/6.x/middleware/'
+        Cached Router (BETA): '/6.x/cached-router/'
+        Dependency Injection: '/6.x/dependency-injection/'
+-
   version: 5.x
   name: League\Route 5.x
   type: Current
   requires: PHP >= 7.2.0
-  release: 5.1.0 - 2021-07
+  release: 5.1.2 - 2021-07
   support: Ongoing
   url: /5.x/
   menu:
@@ -52,16 +70,3 @@
     Strategies: '/4.x/strategies/'
     Middleware: '/4.x/middleware/'
     Dependency Injection: '/4.x/dependency-injection/'
--
-  version: 3.x
-  name: League\Route 3.x
-  type: Legacy
-  requires: PHP >= 5.4.0
-  release: 3.1.0 - 2018-07
-  support: 2019-02
-  url: /3.x/
-  menu:
-    Getting Started: '/3.x/'
-    Basic Usage: '/3.x/usage/'
-    Concepts: '/3.x/concepts/'
-    Strategies: '/3.x/strategies/'

@@ -8,13 +8,14 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/thephpleague/route.svg?style=flat-square)](https://scrutinizer-ci.com/g/thephpleague/route)
 [![Total Downloads](https://img.shields.io/packagist/dt/league/route.svg?style=flat-square)](https://packagist.org/packages/league/route)
 
-This package is compliant with [PSR-1], [PSR-2], [PSR-4], [PSR-7], [PSR-11] and [PSR-15]. If you notice compliance oversights, please send a patch via pull request.
+This package is compliant with [PSR-1], [PSR-2], [PSR-4], [PSR-7], [PSR-11], [PSR-12] and [PSR-15]. If you notice compliance oversights, please send a patch via pull request.
 
 [PSR-1]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
 [PSR-2]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
 [PSR-4]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
 [PSR-7]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-7-http-message.md
 [PSR-11]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md
+[PSR-12]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-12-extended-coding-style-guide.md
 [PSR-15]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-15-request-handlers.md
 
 ## Install

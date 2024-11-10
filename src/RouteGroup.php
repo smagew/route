@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace League\Route;
 
 use League\Route\Middleware\{MiddlewareAwareInterface, MiddlewareAwareTrait};
+use Psr\Http\Server\RequestHandlerInterface;
 use League\Route\Strategy\{StrategyAwareInterface, StrategyAwareTrait};
 
 class RouteGroup implements
@@ -42,7 +43,7 @@ class RouteGroup implements
         return $this->prefix;
     }
 
-    public function map(string|array $method, string $path, string|callable $handler): Route
+    public function map(string|array $method, string $path, string|callable|RequestHandlerInterface $handler): Route
     {
         $path = ($path === '/') ? $this->prefix : $this->prefix . sprintf('/%s', ltrim($path, '/'));
         $route = $this->collection->map($method, $path, $handler);

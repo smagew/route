@@ -5,10 +5,15 @@ declare(strict_types=1);
 namespace League\Route;
 
 use League\Route\Http\Request;
+use Psr\Http\Server\RequestHandlerInterface;
 
 trait RouteCollectionTrait
 {
-    abstract public function map(string|array $method, string $path, string|callable $handler): Route;
+    abstract public function map(
+        string|array $method,
+        string $path,
+        string|callable|RequestHandlerInterface $handler
+    ): Route;
 
     public function delete(string $path, string|callable $handler): Route
     {

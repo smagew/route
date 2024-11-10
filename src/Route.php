@@ -28,11 +28,11 @@ class Route implements
     public function __construct(
         protected array|string $method,
         protected string $path,
-        callable|string $handler,
+        callable|string|RequestHandlerInterface $handler,
         protected ?RouteGroup $group = null,
         protected array $vars = []
     ) {
-        $this->handler = $handler;
+        $this->handler = ($handler instanceof RequestHandlerInterface) ? [$handler, 'handle'] : $handler;
     }
 
     public function getCallable(?ContainerInterface $container = null): callable
@@ -53,6 +53,10 @@ class Route implements
 
         if (is_string($callable)) {
             $callable = $this->resolve($callable, $container);
+        }
+
+        if ($callable instanceof RequestHandlerInterface) {
+            $callable = [$callable, 'handle'];
         }
 
         if (!is_callable($callable)) {

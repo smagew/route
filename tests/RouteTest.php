@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace League\Route;
 
-use League\Route\Fixture\Controller;
+use League\Route\Fixture\{Controller, MiddlewareController};
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
@@ -79,6 +79,33 @@ class RouteTest extends TestCase
         $this->assertIsArray($newCallable);
         $this->assertInstanceOf(Controller::class, $newCallable[0]);
         $this->assertEquals('action', $newCallable[1]);
+    }
+
+    public function testRouteSetsAndResolvesRequestHandlerCallableAsStringViaContainer(): void
+    {
+        $container = $this->createMock(ContainerInterface::class);
+
+        $container
+            ->expects($this->once())
+            ->method('has')
+            ->with($this->equalTo(MiddlewareController::class))
+            ->willReturn(true)
+        ;
+
+        $container
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->equalTo(MiddlewareController::class))
+            ->willReturn(new MiddlewareController())
+        ;
+
+        $callable = 'League\Route\Fixture\MiddlewareController';
+        $route    = new Route('GET', '/', $callable);
+
+        $newCallable = $route->getCallable($container);
+        $this->assertIsArray($newCallable);
+        $this->assertInstanceOf(MiddlewareController::class, $newCallable[0]);
+        $this->assertEquals('handle', $newCallable[1]);
     }
 
     public function testRouteCanSetAndGetAllProperties(): void

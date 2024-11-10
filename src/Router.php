@@ -117,8 +117,11 @@ class Router implements
         return $this->dispatch($request);
     }
 
-    public function map(string|array $method, string $path, string|callable $handler): Route
-    {
+    public function map(
+        string|array $method,
+        string $path,
+        string|callable|RequestHandlerInterface $handler
+    ): Route {
         $path = sprintf('/%s', ltrim($path, '/'));
         $route = new Route($method, $path, $handler);
 

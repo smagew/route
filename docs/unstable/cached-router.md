@@ -55,7 +55,7 @@ $cachedRouter = new League\Route\Cache\Router(function (League\Route\Router $rou
     });
     
     return $router;
-}, $cacheStore);
+}, $cacheStore, cacheEnabled: true, cacheKey: 'my-router');
 
 $request = Laminas\Diactoros\ServerRequestFactory::fromGlobals(
     $_SERVER, $_GET, $_POST, $_COOKIE, $_FILES

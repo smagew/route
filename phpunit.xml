@@ -7,15 +7,7 @@
          stopOnFailure="false"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
          cacheDirectory=".phpunit.cache"
-         backupStaticProperties="false"
-         testdox="false"
-         displayDetailsOnIncompleteTests="true"
-         displayDetailsOnSkippedTests="true"
-         displayDetailsOnTestsThatTriggerDeprecations="true"
-         displayDetailsOnTestsThatTriggerErrors="true"
-         displayDetailsOnTestsThatTriggerNotices="true"
-         displayDetailsOnTestsThatTriggerWarnings="true"
->
+         backupStaticProperties="false">
   <coverage>
     <report>
       <clover outputFile="build/logs/clover.xml"/>
