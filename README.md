@@ -1,6 +1,6 @@
 # Route
 
-[![Author](https://img.shields.io/badge/author-@philipobenito-blue.svg?style=flat-square)](https://twitter.com/philipobenito)
+[![Author](https://img.shields.io/badge/author-Phil%20Bennett-blue?style=flat-square)](https://github.com/philipobenito)
 [![Latest Version](https://img.shields.io/github/release/thephpleague/route.svg?style=flat-square)](https://github.com/thephpleague/route/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/thephpleague/route/test.yml?style=flat-square)](https://github.com/thephpleague/route/actions/workflows/test.yml)
