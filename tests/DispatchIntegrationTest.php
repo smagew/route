@@ -164,10 +164,10 @@ class DispatchIntegrationTest extends TestCase
 
     public function testDispatchesExceptionWithJsonStrategyRoute(): void
     {
-        $request  = $this->createMock(ServerRequestInterface::class);
+        $request = $this->createMock(ServerRequestInterface::class);
         $response = $this->createMock(ResponseInterface::class);
-        $uri      = $this->createMock(UriInterface::class);
-        $body     = $this->createMock(StreamInterface::class);
+        $uri = $this->createMock(UriInterface::class);
+        $body = $this->createMock(StreamInterface::class);
 
         $uri
             ->expects($this->exactly(2))
@@ -683,9 +683,9 @@ class DispatchIntegrationTest extends TestCase
 
     public function testRouteStrategyOverridesGlobalStrategy(): void
     {
-        $request  = $this->createMock(ServerRequestInterface::class);
+        $request = $this->createMock(ServerRequestInterface::class);
         $response = $this->createMock(ResponseInterface::class);
-        $uri      = $this->createMock(UriInterface::class);
+        $uri = $this->createMock(UriInterface::class);
 
         $request
             ->expects($this->once())
@@ -703,6 +703,12 @@ class DispatchIntegrationTest extends TestCase
             ->expects($this->once())
             ->method('getBody')
             ->willReturn($this->createMock(StreamInterface::class))
+        ;
+
+        $response
+            ->expects($this->once())
+            ->method('withHeader')
+            ->willReturnSelf()
         ;
 
         $uri
@@ -750,6 +756,12 @@ class DispatchIntegrationTest extends TestCase
             ->expects($this->once())
             ->method('getBody')
             ->willReturn($this->createMock(StreamInterface::class))
+        ;
+
+        $response
+            ->expects($this->once())
+            ->method('withHeader')
+            ->willReturnSelf()
         ;
 
         $uri
