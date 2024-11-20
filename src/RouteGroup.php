@@ -43,8 +43,11 @@ class RouteGroup implements
         return $this->prefix;
     }
 
-    public function map(string|array $method, string $path, string|callable|RequestHandlerInterface $handler): Route
-    {
+    public function map(
+        string|array $method,
+        string $path,
+        callable|array|string|RequestHandlerInterface $handler
+    ): Route {
         $path = ($path === '/') ? $this->prefix : $this->prefix . sprintf('/%s', ltrim($path, '/'));
         $route = $this->collection->map($method, $path, $handler);
 

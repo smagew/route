@@ -120,7 +120,7 @@ class Router implements
     public function map(
         string|array $method,
         string $path,
-        string|callable|RequestHandlerInterface $handler
+        callable|array|string|RequestHandlerInterface $handler
     ): Route {
         $path = sprintf('/%s', ltrim($path, '/'));
         $route = new Route($method, $path, $handler);
