@@ -28,7 +28,7 @@ class Route implements
     public function __construct(
         protected array|string $method,
         protected string $path,
-        callable|string|RequestHandlerInterface $handler,
+        callable|array|string|RequestHandlerInterface $handler,
         protected ?RouteGroup $group = null,
         protected array $vars = []
     ) {

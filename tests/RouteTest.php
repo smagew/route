@@ -20,11 +20,41 @@ class RouteTest extends TestCase
         $this->assertIsCallable($route->getCallable());
     }
 
-    public function testRouteSetsAndResolvesClassMethodCallable(): void
+    public function testRouteSetsAndResolvesClassMethodArrayCallable(): void
     {
         $callable = [new Controller(), 'action'];
         $route = new Route('GET', '/', $callable);
         $this->assertIsCallable($route->getCallable());
+    }
+
+    public function testRouteSetsAndResolvesLazilyLoadedClassMethodArrayCallableWithoutContainer(): void
+    {
+        $callable = [new Controller(), 'action'];
+        $route = new Route('GET', '/', $callable);
+        $this->assertIsCallable($route->getCallable());
+    }
+
+    public function testRouteSetsAndResolvesLazilyLoadedClassMethodArrayCallableWithContainer(): void
+    {
+        $container = $this->createMock(ContainerInterface::class);
+
+        $container
+            ->expects($this->once())
+            ->method('has')
+            ->with($this->equalTo(Controller::class))
+            ->willReturn(true)
+        ;
+
+        $container
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->equalTo(Controller::class))
+            ->willReturn(new Controller())
+        ;
+
+        $callable = [Controller::class, 'action'];
+        $route = new Route('GET', '/', $callable);
+        $this->assertIsCallable($route->getCallable($container));
     }
 
     public function testRouteSetsAndResolvesNamedFunctionCallable(): void
@@ -53,7 +83,7 @@ class RouteTest extends TestCase
         ;
 
         $callable = 'League\Route\Fixture\Controller::action';
-        $route    = new Route('GET', '/', $callable);
+        $route = new Route('GET', '/', $callable);
 
         $newCallable = $route->getCallable($container);
         $this->assertIsArray($newCallable);
