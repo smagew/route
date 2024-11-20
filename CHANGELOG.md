@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [6.1.0] 2024-11
+
+### Fixed
+- Fixed a bug introduced in 6.0.0 where an array based callable with a string class name would not be considered valid.
+- Added some doc comments for clarity on array types. (@marekskopal)
+
+### Changed
+- Updated `psr/http-message` to `^2.0.0`.
+
 ## [6.0.0] 2024-11
 
 > Note: While this is a major release, there are no breaking changes to the public API. The major version bump is due to the removal of support for PHP 8.0 and below.
