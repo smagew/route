@@ -1,5 +1,5 @@
 {
-    "name": "league/route",
+    "name": "league/route-s",
     "description": "Fast routing and dispatch component including PSR-15 middleware, built on top of FastRoute.",
     "keywords": [
         "league",
