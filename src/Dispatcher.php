@@ -39,10 +39,16 @@ class Dispatcher extends GroupCountBasedDispatcher implements
                 break;
             case FastRoute::FOUND:
                 $route = $this->ensureHandlerIsRoute($match[1], $method, $uri)->setVars($match[2]);
-                $request = $request->withAttribute('route', $route);
                 if ($this->isExtraConditionMatch($route, $request)) {
                     $this->setFoundMiddleware($route);
+                    foreach ($this->getMiddlewareStack() as $middleware) {
+                        if ($middleware instanceof Route) {
+                            continue;
+                        }
+                        $route->middleware($middleware);
+                    }
                     $request = $this->requestWithRouteAttributes($request, $route);
+                    $request = $request->withAttribute('route', $route);
                     break;
                 }
 
