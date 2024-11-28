@@ -125,9 +125,16 @@ class Router implements
         $path = sprintf('/%s', ltrim($path, '/'));
         $route = new Route($method, $path, $handler);
 
+        $route->setName(uniqid('route', true));
+
         $this->routes[] = $route;
 
         return $route;
+    }
+
+    public function getRoutes(): array
+    {
+        return $this->routes;
     }
 
     public function prepareRoutes(ServerRequestInterface $request): void
